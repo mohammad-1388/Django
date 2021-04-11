@@ -1,0 +1,52 @@
+{% extends 'accounts/base_account.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>    ورود کاربران</title>
+{% endblock %}
+
+
+{% block outContainer %}
+    <img src="{% static 'accounts/img/Choob.jpg' %}" class="myImage"
+         alt="پیام رسان تیک" title="پیام رسان تیک">
+{% endblock %}
+{% block main %}
+    <div class="row text-center">
+        <div class="col-md-4 col-sm-12 offset-4">
+            <form method="post" action="" class="formBox alert alert-secondary" autocomplete="on">
+                {% csrf_token %}
+                <div class="form-group">
+                    <i class="fas fa-anchor" style="width: 100px; height: 100px"></i>
+                </div>
+                {% if error %}
+                <div class="alert alert-danger">
+
+                            {{ error }}
+                </div>
+            {% endif %}
+                <div class="form-group">
+                    <label for="username">
+                        نام کاربری
+                    </label>
+                    <input id="username" placeholder="نام کاربری" type="text" name="username"
+                           class="form-control"
+                           title="نام کاربری خود را وارد کنید">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="username">
+                        گذرواژه
+                    </label>
+                    <input id="username" placeholder="گذرواژه" type="password" name="password"
+                           class="form-control"
+                           title="گذرواژه خود را وارد کنید ">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <button class="col-md-12 btn btn-success" onclick="CheckInputs()">ورود</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

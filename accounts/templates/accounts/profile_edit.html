@@ -1,0 +1,126 @@
+{% extends "accounts/base_account.html" %}
+{% load static %}
+
+{% block title %}
+    <title>
+        ویرایش نمایه
+    </title>
+{% endblock %}
+{% block outContainer %}
+    <img src="{% static 'accounts/img/Choob.jpg' %}" class="myImage"
+         alt="پیام رسان تیک" title="پیام رسان تیک">
+{% endblock %}
+{% block main %}
+    <br><br><br>
+    <div class="row " style="font-size: larger">
+        <form action="" method="post" class="alert alert-secondary col-md-12" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row py-3">
+                <div class="col-10 item-details profile-items">
+                    <div class="row px-3">
+                        <div class="col-2">
+                            <small class="text-muted">
+                                <i class="far fa-user"></i>
+                                نام کاربری:
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            {{ user.username }}
+                        </div>
+                        <div class="w-100 my-1"></div>
+                        <div class="col-2">
+                            <small class="text-muted">
+                                <i class="far fa-address-card"></i>
+                                نام:
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            {{ user_form.first_name }}
+                        </div>
+                        <div class="col-2 pl-0">
+                            <small class="text-muted">
+                                <i class="far fa-address-card"></i>
+                                نام خانوادگی:
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            {{ user_form.last_name }}
+                        </div>
+                        <div class="w-100 my-1"></div>
+                        <div class="col-2">
+                            <small class="text-muted">
+                                <i class="far fa-envelope-open"></i>
+                                ایمیل:
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            {{ user_form.email }}
+                        </div>
+                        <div class="col-2 pl-0">
+                            <small class="text-muted">
+                                <i class="fas fa-mobile-alt"></i>
+                                تلفن همراه:
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            {{ profile_form.mobile }}
+                        </div>
+                        <div class="col-2 pl-0">
+                            <small class="text-muted">
+                                <i class="fas fa-mobile-alt"></i>
+                                آی دی :
+                            </small>
+                        </div>
+                        <div class="col-4">
+                            {{ profile_form.idUser }}
+                        </div>
+                        <div class="w-100 my-1"></div>
+                        <div class="w-100 my-1"></div>
+                        <div class="btn-group text-left" style="direction: ltr">
+                            <button type="submit" class="btn btn-outline-success">
+                                ویرایش
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button id="Back" type="button" class="btn btn-danger" style="color: white;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                بازگشت
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 pr-0 text-center">
+                    {% if user.profile.profile_picture %}
+                        <img class="img-thumbnail" style="width: 100px; height: 100px; border-radius: 50%"
+                             src="{{ user.profile.profile_picture.url }}"
+                             alt="{{ user.profile }}">
+                    {% endif %}
+                    <button type="button" class="btn btn-warning btn-sm mt-2"
+                            data-toggle="modal" data-target="#profile-image-modal">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <div class="modal fade" id="profile-image-modal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    {{ profile_form.profile_picture }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block extra_js %}
+    <script>
+        document.getElementById("Back").addEventListener('click', function () {
+            window.history.back();
+        });
+    </script>
+{% endblock %}

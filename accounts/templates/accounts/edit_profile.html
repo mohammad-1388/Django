@@ -1,0 +1,122 @@
+{% extends 'ChatTick/_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>ویرایش نمایه</title>
+{% endblock %}
+{% block outContainer %}
+    <img src="{% static 'accounts/img/Choob.jpg' %}" class="myImage"
+         alt="پیام رسان تیک" title="پیام رسان تیک">
+{% endblock %}
+{% block main %}
+    <br><br>
+    <br><br>
+    <div class="row text-right text-center">
+        <div class="card bg-dark col-md-12 text-center" style="padding: 30px">
+            <div class="card-img">
+                {% if user.profile.profile_picture %}
+                    <img class="img-thumbnail" style="border-radius: 50%" src="{{ user.profile.profile_picture.url }}"
+                         alt="Hello World">
+                {% else %}
+                    <i style="width: 200px; height: 200px;" class="fas fa-user"></i>
+                {% endif %}
+            </div>
+            <h2 class="card-title">
+                ویرایش پروفایل
+            </h2>
+            <div class="card-subtitle">
+                برای ویرایش نمایه کاربری
+            </div>
+            <br>
+
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row py-3">
+                    <div class="col-10 item-details profile-items">
+                        <div class="row px-3">
+                            <div class="col-2">
+                                <small class="text-muted">
+                                    <i class="far fa-user"></i>
+                                    نام کاربری:
+                                </small>
+                            </div>
+                            <div class="col-4">
+                                {{ user.username }}
+                            </div>
+                            <div class="col-2 pl-0">
+                                <small class="text-muted">
+                                    <i class="far fa-clock"></i>
+                                    جنسیت:
+                                </small>
+                            </div>
+                            <div class="col-4">
+                                {{ profile_form.gender }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                            <div class="col-2">
+                                <small class="text-muted">
+                                    <i class="far fa-address-card"></i>
+                                    نام:
+                                </small>
+                            </div>
+                            <div class="col-4">
+                                {{ user_form.first_name }}
+                            </div>
+                            <div class="col-2 pl-0">
+                                <small class="text-muted">
+                                    <i class="far fa-address-card"></i>
+                                    نام خانوادگی:
+                                </small>
+                            </div>
+                            <div class="col-4">
+                                {{ user_form.last_name }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                            <div class="col-2">
+                                <small class="text-muted">
+                                    <i class="far fa-envelope-open"></i>
+                                    ایمیل:
+                                </small>
+                            </div>
+                            <div class="col-4">
+                                {{ user_form.email }}
+                            </div>
+                            <div class="col-2 pl-0">
+                                <small class="text-muted">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    تلفن همراه:
+                                </small>
+                            </div>
+                            <div class="col-4">
+                                {{ profile_form.mobile }}
+                            </div>
+                            <div class="w-100 my-1"></div>
+                        </div>
+                    </div>
+            </form>
+            <div class="btn-group text-left" style="direction: ltr">
+                <a type="submit" class="btn btn-outline-success">
+                    ویرایش
+                    <i class="fas fa-edit"></i>
+                </a>
+                <button id="Back" type="button" class="btn btn-danger" style="color: white;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    بازگشت
+                </button>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.getElementById("Back").addEventListener('click', function () {
+            window.history.back();
+        });
+    </script>
+{% endblock %}
+
+
+

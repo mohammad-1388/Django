@@ -1,0 +1,91 @@
+{% extends 'ChatTick/_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>مشاهده نمایه</title>
+{% endblock %}
+{% block outContainer %}
+    <img src="{% static 'accounts/img/Choob.jpg' %}" class="myImage"
+         alt="پیام رسان تیک" title="پیام رسان تیک">
+{% endblock %}
+{% block main %}
+    <br><br>
+    <br><br>
+    <div class="row text-right text-center" style="text-align: center">
+        <div class="card bg-secondary col-md-6 offset-3 text-center" style="padding: 30px">
+            <div class="card-img">
+                {% if user.profile.profile_picture %}
+                    <img class="img-thumbnail" style="border-radius: 50%" src="{{ user.profile.profile_picture.url }}"
+                         alt="Hello World">
+                {% endif %}
+            </div>
+            <h2 class="card-title">
+                نمایه کاربری
+            </h2>
+            <div class="card-subtitle">
+                برای مشاهده نمایه کاربری
+            </div>
+            <br>
+            <div class="text-center" style="text-align: center; direction: rtl">
+                <div class="alert alert-secondary">
+                    <span><i class="far fa-user"></i></span>
+                    <span>نام کاربری :</span>
+                    <span>{{ user.username }}</span>
+                </div>
+                <br>
+                <div class="alert alert-secondary">
+                    <span><i class="fas fa-user-circle"></i></span>
+                    <span>نام و نام خانوادگی :</span>
+                    <span>{{ user.get_full_name }}</span>
+                </div>
+                <br>
+                <div class="alert alert-secondary">
+                    <span><i class="fa fa-mobile-alt"></i></span>
+                    <span>شماره تلفن :</span>
+                    <span>{{ user.profile.mobile }}</span>
+                </div>
+                <br>
+                <div class="alert alert-secondary">
+                    <span><i class="fas fa-address-card"></i></span>
+                    <span>ایمیل : </span>
+                    <span>{{ user.email }}</span>
+                </div>
+                <br>
+                <div class="alert alert-secondary">
+
+                    <span style="font-size: 1.25em;">@</span>
+
+
+                    <span>آی دی : </span>
+                    <span style="direction: ltr">
+                        &
+                        {{ user.profile.idUser }}</span>
+                </div>
+                <br>
+            </div>
+            <div class="btn-group">
+                <a type="button" href="{% url 'accounts:change_password' %}" class="text-dark btn btn-warning">
+                    تغییر گذرواژه
+                    <i class="fas fa-key"></i>
+                </a>
+                <a type="button" href="{% url 'accounts:edit_profile' %}" class="btn btn-primary">
+                    ویرایش پروفایل
+                    <i class="fas fa-edit"></i>
+                </a>
+                <button id="Back" type="button" class="btn btn-danger" style="color: white;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    بازگشت
+                </button>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.getElementById("Back").addEventListener('click', function () {
+            window.history.back();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'ChatTick/_base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>ثبت نام</title>
+    <style>
+        input {
+            direction: rtl;
+        }
+    </style>
+{% endblock %}
+
+{% block outContainer %}
+    <img src="{% static 'accounts/img/Choob.jpg' %}" class="myImage"
+         alt="پیام رسان تیک" title="پیام رسان تیک">
+{% endblock %}
+
+{% block main %}
+    <br><br><br>
+    <div class="row">
+        <form action="" class="row col-md-12" method="post" autocomplete="on" oninput="isValid()">
+            {% csrf_token %}
+            <div class="well col-md-6 offset-3 alert alert-secondary text-center">
+                <div class="well-title">
+                    <h1>ثبت نام</h1>
+                </div>
+                <hr>
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="username">
+                        <i class="fas fa-user-circle"></i>
+                        نام کاربری
+                    </label>
+                    <input id="username" name="username" placeholder="نام کاربری . . ." type="text"
+                           class="form-control">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-key"></i>
+                        گذرواژه
+                    </label>
+                    <input id="password" name="password" placeholder="گذرواژه . . ." type="password"
+                           class="form-control">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="rpassword">
+                        <i class="fas fa-keyboard"></i>
+                        گذرواژه تکرار
+                    </label>
+                    <input id="rpassword" name="rpassword" placeholder="تکرار گذرواژه . . ." type="password"
+                           class="form-control">
+                    <div id="message" class="alert alert-info">
+                        گذرواژه خود را وارد کنید
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-user-times"></i>
+                        ایمیل
+                    </label>
+                    <input id="email" name="email" placeholder="ایمیل . . ." type="email"
+                           class="form-control">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="id">
+                        <i class="fas fa-user-astronaut"></i>
+                        آی دی
+                    </label>
+                    <input id="id" name="id" placeholder="آی دی  . . . " type="text" class="form-control"
+                           pattern="[\w\d_]+">
+                </div>
+                <hr>
+                <div class="btn-group">
+                    <button id="btn-submit" disabled type="submit" class="btn btn-success ">
+                        ذخیره
+                        <i class="fas fa-sign-in-alt"></i>
+                    </button>
+                    <button id="Back" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        بازگشت
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+
+
+{% block extra_js %}
+    <script>
+        document.getElementById("Back").addEventListener('click', function () {
+            window.history.back();
+        });
+
+        function isValid() {
+            let message_password = document.querySelector('#message');
+            let rpa = document.querySelector('#rpassword');
+            if (rpa.value === document.querySelector('#password').value) {
+                if (rpa.value.toString().length < 8) {
+                    message_password.classList.remove('alert-info');
+
+                    message_password.classList.remove('alert-danger');
+                    message_password.classList.remove('alert-success');
+                    message_password.classList.add('alert-warning');
+                    message_password.innerHTML = "حداقل طول گذرواژه باید 8 باشد";
+                    document.querySelector('#btn-submit').disabled = true;
+
+                } else {
+                    message_password.classList.remove('alert-info');
+                    message_password.classList.remove('alert-danger');
+                    message_password.classList.remove('alert-warning');
+
+                    message_password.classList.add('alert-success');
+                    message_password.innerHTML = "گذرواژه قابل قبول میباشد";
+                    document.querySelector('#btn-submit').disabled = false;
+                }
+            } else {
+                message_password.classList.remove('alert-info');
+
+                message_password.classList.remove('alert-success');
+                message_password.classList.remove('alert-warning');
+                message_password.classList.add('alert-danger');
+                message_password.innerHTML = "گذرواژه با تکرارش مطابقت ندارد";
+                document.querySelector('#btn-submit').disabled = true;
+
+            }
+        }
+    </script>
+{% endblock %}

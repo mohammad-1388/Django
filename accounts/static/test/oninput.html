@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oninput</title>
+</head>
+<body>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+    <input type="range" name="a" id="a" value="1">
+    <input type="number" name="b" id="b" value="0" hidden>
+    <output name="x"></output>
+</form>
+</body>
+</html>
